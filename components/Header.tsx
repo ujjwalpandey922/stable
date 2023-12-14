@@ -33,9 +33,6 @@ const Header = () => {
     fetchPrices();
   }, []);
 
-  // Log the gasPrice as an integer to the console
-  console.log(parseInt(gasPrice));
-
   return (
     <>
       {/* Navigation bar */}
