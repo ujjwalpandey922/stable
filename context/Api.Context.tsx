@@ -5,7 +5,6 @@ import React, {
   useContext,
   ReactNode,
   Dispatch,
-  SetStateAction,
 } from "react";
 import { TokenTransaction, Transaction } from "./type";
 
@@ -19,6 +18,7 @@ type ApiContextProps = {
 
 type Action =
   | { type: "SET_ACCOUNT_DETAILS"; payload: AccountDetails | null }
+  | { type: "ADD_NORMAL_TRANSACTION"; payload: Transaction[] | null }
   | { type: "SET_TOKEN_DETAILS"; payload: TokenDetails | null };
 type AccountDetails = {
   etherBalance: string;
@@ -51,6 +51,15 @@ const reducer = (state: ApiContextProps, action: Action): ApiContextProps => {
       return { ...state, accountDetails: action.payload };
     case "SET_TOKEN_DETAILS":
       return { ...state, tokenDetails: action.payload };
+    case "ADD_NORMAL_TRANSACTION":
+      return {
+        ...state,
+        // @ts-ignore
+        accountDetails: {
+          ...state?.accountDetails,
+          normalTransactionList: action?.payload || [], // Assuming action.payload contains the new transaction
+        },
+      };
     default:
       return state;
   }

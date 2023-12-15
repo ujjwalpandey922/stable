@@ -4,6 +4,7 @@ import "./globals.css";
 import { Web3Modal } from "@/context/Web3Modal";
 import { ApiProvider } from "@/context/Api.Context";
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {

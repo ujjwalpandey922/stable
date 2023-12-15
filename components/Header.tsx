@@ -40,22 +40,24 @@ const Header = () => {
         <div className="flex justify-between max-w-[80rem] m-auto p-4 items-center">
           <div className="flex gap-8 items-center">
             {/* Display Ethereum price */}
-            <h3 className="font-bold text-2xl text-[#FFD700] items-end">
-              Ether Price :{" "}
-              <span className="font-medium text-xl text-blue-300">
-                $
-                {ethPrice &&
-                  parseFloat(parseFloat(ethPrice).toFixed(2)).toLocaleString()}
-              </span>
-            </h3>
+            {ethPrice && (
+              <h3 className="font-bold md:text-2xl text-sm hidden sm:flex text-[#FFD700] items-end">
+                Ether Price :{" "}
+                <span className=" font-medium md:text-xl text-sm text-blue-300">
+                  &nbsp; ${" "}
+                  {parseFloat(parseFloat(ethPrice).toFixed(2)).toLocaleString()}
+                </span>
+              </h3>
+            )}
             {/* Display Gas price */}
-            <h3 className="font-bold text-2xl text-[#FFD700]  flex items-end ">
-              ⛽ Gas :
-              <span className="font-medium text-lg text-blue-300 ">
-                &nbsp;
-                {gasPrice && parseInt(gasPrice)} Gwei
-              </span>
-            </h3>
+            {gasPrice && (
+              <h3 className="font-bold md:text-2xl text-sm text-[#FFD700]  hidden sm:flex items-end">
+                ⛽ Gas :
+                <span className="font-medium md:text-xl text-sm text-blue-300 ">
+                  &nbsp; {parseInt(gasPrice)} Gwei
+                </span>
+              </h3>
+            )}
           </div>
           {/* Connect Wallet button */}
           <w3m-button />
