@@ -12,7 +12,7 @@ const Search = () => {
 
     try {
       // Check the length of the input to determine if it's an address or contract hash
-      const isContractHash = input.length === 42;
+      const isContractHash = input.length === 40;
       const isAddress = input.length === 42;
 
       if (isContractHash || isAddress) {
@@ -31,12 +31,13 @@ const Search = () => {
             payload: {
               totalSupply: resTotalSupply.data.result,
               tokenBalance: resTokenBalance.data.result,
+              contactAddress: input,
             },
           });
         } else {
           const balanceEndpoint = `https://api.etherscan.io/api?module=account&action=balance&address=${input}&tag=latest&apikey=${process.env.NEXT_PUBLIC_API_KEY_TOKEN}`;
           const normalTransactionEndpoint = `https://api.etherscan.io/api?module=account&action=txlist&address=${input}&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey=${process.env.NEXT_PUBLIC_API_KEY_TOKEN}`;
-          const ercEndpoint = `https://api.etherscan.io/api?module=account&action=tokentx&contractaddress=0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2&address=${input}&page=1&offset=100&startblock=0&endblock=27025780&sort=asc&apikey=${process.env.NEXT_PUBLIC_API_KEY_TOKEN}`;
+          const ercEndpoint = `https://api.etherscan.io/api?module=account&action=tokentx&address=${input}&page=1&offset=100&startblock=0&endblock=27025780&sort=asc&apikey=${process.env.NEXT_PUBLIC_API_KEY_TOKEN}`;
 
           const [resBalance, resNormalTranscation, resERC] = await Promise.all([
             axios(balanceEndpoint),
@@ -50,8 +51,10 @@ const Search = () => {
               etherBalance: resBalance.data.result,
               normalTransactionList: resNormalTranscation.data.result,
               tokenList: resERC.data.result,
+              address:input
             },
           });
+          setInput("")
         }
       } else {
         // Handle the case when the input is neither an address nor a contract hash

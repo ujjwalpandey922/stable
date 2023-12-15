@@ -24,11 +24,13 @@ type AccountDetails = {
   etherBalance: string;
   normalTransactionList: Transaction[];
   tokenList: TokenTransaction[];
+  address: string;
 };
 
 type TokenDetails = {
-    tokenBalance:string;
-    totalSupply:string;
+  tokenBalance: string;
+  totalSupply: string;
+  contactAddress: string;
 };
 
 // Initial state
