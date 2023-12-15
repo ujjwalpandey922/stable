@@ -41,14 +41,16 @@ const Pagination = () => {
   // Render the pagination buttons
   return (
     <div className="flex flex-wrap justify-center mt-4 gap-8">
-      <button
-        onClick={() => newTransactionDetails("pre")}
-        className={
-          "p-4 font-extrabold border border-gray-800 bg-yellow-400 text-gray-800 rounded-md cursor-pointer transition duration-300 hover:text-base hover:scale-95 flex items-center gap-4"
-        }
-      >
-        <GrLinkPrevious /> Pre
-      </button>
+      {currentPage !== 1 && (
+        <button
+          onClick={() => newTransactionDetails("pre")}
+          className={
+            "p-4 font-extrabold border border-gray-800 bg-yellow-400 text-gray-800 rounded-md cursor-pointer transition duration-300 hover:text-base hover:scale-95 flex items-center gap-4"
+          }
+        >
+          <GrLinkPrevious /> Pre
+        </button>
+      )}
       <span className="border rounded-lg bg-transparent shadow-xl text-[#FFD700] p-4">
         Page {currentPage}
       </span>
